@@ -1,0 +1,63 @@
+.alert {
+  background: #2f374c;
+  color: #fff;
+  padding: 20px;
+  border-radius: 3px;
+  margin: 1em 0;
+}
+
+.alert-success {
+  background: #60ba43;
+  color: #fff;
+}
+
+.alert-danger {
+  background: #c64539;
+  color: #fff;
+}
+
+.alert-warning {
+  background: #d9e22b;
+  color: #000;
+}
+
+.alert-purple {
+  background: #c02ae2;
+  color: #fff;
+}
+
+.menu-dark .menu {
+  width: 100%;
+  background: red;
+  padding: 0px;
+}
+.menu-dark .menu ul {
+  padding: 0 5px;
+}
+.menu-dark .menu ul li.menu-item {
+  display: inline-block;
+  background: #cfcfcf;
+  padding: 12px 24px;
+  margin: 3px 0;
+  cursor: pointer;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.menu-dark .menu ul li.menu-item a {
+  color: red;
+  text-decoration: none;
+}
+.menu-dark .menu ul li.menu-item:hover {
+  background: #9e9e9e;
+  color: #263e7b;
+}
+
+.container {
+  padding: 0 15px;
+  margin: 20px 0;
+}
+
+/*# sourceMappingURL=style.css.map */
