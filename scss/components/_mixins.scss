@@ -6,3 +6,155 @@
   transition: $args;
 }
 
+
+@mixin breakpoint($point) {
+    @if $point == xs {
+            @media (max-width: 575.98px) { @content; }
+    }
+    @else if $point == sm {
+            @media (min-width: 576px) and (max-width: 767.98px) { @content; }
+    }
+    @else if $point == md {
+            @media (min-width: 768px) and (max-width: 991.98px) { @content; }
+    }
+    @else if $point == lg {
+            @media (min-width: 992px) and (max-width: 1199.98px) { @content; }
+    }
+    @else if $point == xl {
+            @media (min-width: 1200px) { @content; }
+    }
+
+    @else if $point == xs_up {
+            @media (min-width: 1px) { @content; }
+    }
+    @else if $point == sm_up {
+            @media (min-width: 576px) { @content; }
+    }
+    @else if $point == md_up {
+            @media (min-width: 768px) { @content; }
+    }
+    @else if $point == lg_up {
+            @media (min-width: 992px) { @content; }
+    }
+    @else if $point == xl_up {
+            @media (min-width: 1200px) { @content; }
+    }
+
+    @if $point == xs_down {
+            @media (max-width: 575.98px) { @content; }
+    }
+    @else if $point == sm_down {
+            @media (max-width: 767.98px) { @content; }
+    }
+    @else if $point == md_down {
+            @media (max-width: 991.98px) { @content; }
+    }
+    @else if $point == lg_down {
+            @media (max-width: 1199.98px) { @content; }
+    }
+}
+
+/* start mixin for responsive */
+
+$breakpoints: (
+        mobile-xs: 320px,
+        mobile-xs-wide: 350px,
+        mobile-vxs: 400px,
+        mobile-sm: 480px,
+        mobile-lg: 520px,
+        tablet-xs: 576px,
+        tablet-sm: 600px,
+        tablet-md: 768px,
+        tablet-xmd: 840px,
+        tablet-lg: 920px,
+        desktop-xs: 992px,
+        desktop-sm: 1024px,
+        desktop-md: 1124px,
+        desktop-lg: 1200px,
+        desktop-xlg: 1480px,
+        desktop-vxlg:1920px
+);
+
+/* --[ RESPOND ABOVE ]-- */
+
+/* --[ @include respond-above(sm) {} ]-- */
+@mixin respond-above($breakpoint) {
+
+  /* --[ If the breakpoint exists in the map. ]-- */
+  @if map-has-key($breakpoints, $breakpoint) {
+
+    /* --[ Get the breakpoint value. ]-- */
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
+
+    /* --[ Write the media query. ]-- */
+    @media (min-width: $breakpoint-value) {
+      @content;
+    }
+
+    /* --[ If the breakpoint doesn't exist in the map. ]-- */
+  } @else {
+
+    /* --[ Log a warning ]-- */
+    @warn 'Invalid breakpoint: #{$breakpoint}.';
+  }
+}
+
+/* --[ RESPOND BELOW ]-- */
+
+/* --[ @include respond-below(sm) {} ]-- */
+@mixin respond-below($breakpoint) {
+
+  /* --[ If the breakpoint exists in the map. ]-- */
+  @if map-has-key($breakpoints, $breakpoint) {
+
+    /* --[ Get the breakpoint value. ]-- */
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
+
+    /* --[ Write the media query. ]-- */
+    @media (max-width: ($breakpoint-value - 1)) {
+      @content;
+    }
+
+    /* --[ If the breakpoint doesn't exist in the map. ]-- */
+  } @else {
+
+    /* --[ Log a warning. ]-- */
+    @warn 'Invalid breakpoint: #{$breakpoint}.';
+  }
+}
+
+/* --[ RESPOND BETWEEN ]-- */
+
+/* --[ @include respond-between(sm, md) {} ]-- */
+@mixin respond-between($lower, $upper) {
+
+  /* --[ If both the lower and upper breakpoints exist in the map. ]-- */
+  @if map-has-key($breakpoints, $lower) and map-has-key($breakpoints, $upper) {
+
+    /* --[ Get the lower and upper breakpoints. ]-- */
+    $lower-breakpoint: map-get($breakpoints, $lower);
+    $upper-breakpoint: map-get($breakpoints, $upper);
+
+    /* --[ Write the media query. ]-- */
+    @media (min-width: $lower-breakpoint) and (max-width: ($upper-breakpoint - 1)) {
+      @content;
+    }
+
+    /* --[ If one or both of the breakpoints don't exist. ]-- */
+  } @else {
+
+    /* --[ If lower breakpoint is invalid. ]-- */
+    @if (map-has-key($breakpoints, $lower) == false) {
+
+      /* --[ Log a warning. ]-- */
+      @warn 'Your lower breakpoint was invalid: #{$lower}.';
+    }
+
+    /* --[ If upper breakpoint is invalid. ]-- */
+    @if (map-has-key($breakpoints, $upper) == false) {
+
+      /* --[ Log a warning. ]-- */
+      @warn 'Your upper breakpoint was invalid: #{$upper}.';
+    }
+  }
+}
