@@ -2,18 +2,18 @@
 		width: 100%;
 	    background: #000;
 	    padding: 0px;
-	    
+
 		ul {
 			padding:0 5px;
 
 			li.menu-item {
 				display: inline-block;
-			    background: #cfcfcf;
+			    background: #000;
 			    padding: 12px 24px;
 			    margin: 3px 0;
 				cursor: pointer;
 
-				@include transition(all .3s ); 
+				@include transition(all .3s );
 
 			    a {
 			    	color: #fff;
@@ -34,7 +34,7 @@ $colours:
  rgb(255,0,0),
  rgb(135,206,250),
  rgb(255,255,0)
-;   
+;
 
 @each $color in $colours {
    .menu-color-#{$color} {
